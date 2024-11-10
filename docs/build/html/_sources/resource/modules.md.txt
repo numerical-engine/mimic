@@ -1,6 +1,7 @@
-# Chapter2-Modules
+# modules
 ```{toctree}
 :maxdepth: 2
 :caption: Contents
-lib/core/tree
+mimic/core/tree
+mimic/benchmark/tree
 ```

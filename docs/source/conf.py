@@ -1,4 +1,4 @@
-project = 'myst_sphinx'
+project = 'MIMIC'
 copyright = '2024, Yuji Nakanishi'
 author = 'Yuji Nakanishi'
 release = '0.0.1'

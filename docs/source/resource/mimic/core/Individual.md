@@ -1,8 +1,7 @@
+### Individual
 ```{eval-rst}  
-.. automodule:: lib.core
+.. automodule:: mimic.core.Individual
    :members:
    :undoc-members:
    :show-inheritance:
-
-additional sentence
 ```

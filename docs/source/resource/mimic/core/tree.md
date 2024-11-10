@@ -2,5 +2,9 @@
 ```{toctree}
 :maxdepth: 1
 :caption: Contents
-SampleClass
+Function
+Individual
+Population
+Environment
+Optimizer
 ```

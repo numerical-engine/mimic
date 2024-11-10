@@ -1,0 +1,11 @@
+### Objective_Function
+```{eval-rst}  
+.. automodule:: mimic.core.Objective_Function
+   :members:
+   :undoc-members:
+   :show-inheritance:
+```
+```{note}
+Any objective function should be defined by classes inheriting this module, because forward method isn't implemented.
+Codes in `./mimic/Benchmark/` will help you.
+```

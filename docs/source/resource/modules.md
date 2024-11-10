@@ -1,7 +1,7 @@
-# Chapter1-Docs
-sample line
-
+# modules
 ```{toctree}
 :maxdepth: 2
 :caption: Contents
+mimic/core/tree
+mimic/benchmark/tree
 ```

@@ -1,9 +1,9 @@
-# myst_sphinx documentation
-This is a just sample documentation
+# MIMIC documentation
+**MIMIC** is a open source python module for single objective evolutionary comuputing.
 
 ```{toctree}
 :maxdepth: 2
 :caption: Contents
-resource/chapter1
-resource/chapter2
+resource/introduction
+resource/modules
 ```
