@@ -9,3 +9,7 @@ Function is written below.
 ```{math}
 f(\boldsymbol{x}) = \Sigma_i x_i^2
 ```
+The best solution is 
+```{math}
+\boldsymbol{x}^* = \boldsymbol{0}
+```

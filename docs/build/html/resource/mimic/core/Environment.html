@@ -19,7 +19,7 @@
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="benchmark" href="../benchmark/tree.html" />
+    <link rel="next" title="Optimizer" href="Optimizer.html" />
     <link rel="prev" title="Population" href="Population.html" /> 
 </head>
 
@@ -51,9 +51,10 @@
 <li class="toctree-l3"><a class="reference internal" href="Individual.html">Individual</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Population.html">Population</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Environment</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#mimic.core.Environment.environment"><code class="docutils literal notranslate"><span class="pre">environment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mimic.core.Environment.Environment"><code class="docutils literal notranslate"><span class="pre">Environment</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="Optimizer.html">Optimizer</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/tree.html">benchmark</a></li>
@@ -90,58 +91,58 @@
   <section id="module-mimic.core.Environment">
 <span id="environment"></span><h1>Environment<a class="headerlink" href="#module-mimic.core.Environment" title="Link to this heading"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="mimic.core.Environment.environment">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mimic.core.Environment.</span></span><span class="sig-name descname"><span class="pre">environment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objective_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty_functions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_functions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimic.core.Environment.environment" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="mimic.core.Environment.Environment">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mimic.core.Environment.</span></span><span class="sig-name descname"><span class="pre">Environment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">objective_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty_functions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att_functions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimic.core.Environment.Environment" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Abstruct class for environment</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>objective_function</strong> (<a class="reference internal" href="Function.html#mimic.core.Function.function_meta" title="mimic.core.Function.function_meta"><em>Function.function_meta</em></a>) – Objective function class.</p></li>
-<li><p><strong>penalty_functions</strong> (<em>list</em><em>[</em><a class="reference internal" href="Function.html#mimic.core.Function.penalty_function" title="mimic.core.Function.penalty_function"><em>Function.penalty_function</em></a><em>]</em>) – list of penalty function class.</p></li>
-<li><p><strong>att_functions</strong> (<em>list</em><em>[</em><a class="reference internal" href="Function.html#mimic.core.Function.function_meta" title="mimic.core.Function.function_meta"><em>Function.function_meta</em></a><em>]</em>)</p></li>
+<li><p><strong>objective_function</strong> (<a class="reference internal" href="Function.html#mimic.core.Function.Function_meta" title="mimic.core.Function.Function_meta"><em>Function.Function_meta</em></a>) – Objective function class.</p></li>
+<li><p><strong>penalty_functions</strong> (<em>list</em><em>[</em><em>Function.Penalty_function</em><em>]</em>) – list of penalty function class.</p></li>
+<li><p><strong>att_functions</strong> (<em>list</em><em>[</em><a class="reference internal" href="Function.html#mimic.core.Function.Function_meta" title="mimic.core.Function.Function_meta"><em>Function.Function_meta</em></a><em>]</em>)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="mimic.core.Environment.environment.objective_function">
-<span class="sig-name descname"><span class="pre">objective_function</span></span><a class="headerlink" href="#mimic.core.Environment.environment.objective_function" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="mimic.core.Environment.Environment.objective_function">
+<span class="sig-name descname"><span class="pre">objective_function</span></span><a class="headerlink" href="#mimic.core.Environment.Environment.objective_function" title="Link to this definition"></a></dt>
 <dd><p>Objective function class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="Function.html#mimic.core.Function.function_meta" title="mimic.core.Function.function_meta">Function.function_meta</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="Function.html#mimic.core.Function.Function_meta" title="mimic.core.Function.Function_meta">Function.Function_meta</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="mimic.core.Environment.environment.penalty_functions">
-<span class="sig-name descname"><span class="pre">penalty_functions</span></span><a class="headerlink" href="#mimic.core.Environment.environment.penalty_functions" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="mimic.core.Environment.Environment.penalty_functions">
+<span class="sig-name descname"><span class="pre">penalty_functions</span></span><a class="headerlink" href="#mimic.core.Environment.Environment.penalty_functions" title="Link to this definition"></a></dt>
 <dd><p>list of penalty function class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[<a class="reference internal" href="Function.html#mimic.core.Function.penalty_function" title="mimic.core.Function.penalty_function">Function.penalty_function</a>]</p>
+<dd class="field-odd"><p>list[Function.Penalty_function]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="mimic.core.Environment.environment.att_functions">
-<span class="sig-name descname"><span class="pre">att_functions</span></span><a class="headerlink" href="#mimic.core.Environment.environment.att_functions" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="mimic.core.Environment.Environment.att_functions">
+<span class="sig-name descname"><span class="pre">att_functions</span></span><a class="headerlink" href="#mimic.core.Environment.Environment.att_functions" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list[<a class="reference internal" href="Function.html#mimic.core.Function.function_meta" title="mimic.core.Function.function_meta">Function.function_meta</a>]</p>
+<dd class="field-odd"><p>list[<a class="reference internal" href="Function.html#mimic.core.Function.Function_meta" title="mimic.core.Function.Function_meta">Function.Function_meta</a>]</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="mimic.core.Environment.environment.get_fitness">
-<span class="sig-name descname"><span class="pre">get_fitness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#mimic.core.Environment.environment.get_fitness" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="mimic.core.Environment.Environment.get_fitness">
+<span class="sig-name descname"><span class="pre">get_fitness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#mimic.core.Environment.Environment.get_fitness" title="Link to this definition"></a></dt>
 <dd><p>Return fitness value of individual</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>individual</strong> (<a class="reference internal" href="Individual.html#mimic.core.Individual.individual" title="mimic.core.Individual.individual"><em>core.Individual.individual</em></a>) – Individual</p>
+<dd class="field-odd"><p><strong>individual</strong> (<a class="reference internal" href="Individual.html#mimic.core.Individual.Individual" title="mimic.core.Individual.Individual"><em>core.Individual.Individual</em></a>) – Individual</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Fitness value</p>
@@ -153,12 +154,12 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="mimic.core.Environment.environment.get_penalty">
-<span class="sig-name descname"><span class="pre">get_penalty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#mimic.core.Environment.environment.get_penalty" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="mimic.core.Environment.Environment.get_penalty">
+<span class="sig-name descname"><span class="pre">get_penalty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#mimic.core.Environment.Environment.get_penalty" title="Link to this definition"></a></dt>
 <dd><p>Return penalty value of individual</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>individual</strong> (<a class="reference internal" href="Individual.html#mimic.core.Individual.individual" title="mimic.core.Individual.individual"><em>core.Individual.individual</em></a>) – Individual</p>
+<dd class="field-odd"><p><strong>individual</strong> (<a class="reference internal" href="Individual.html#mimic.core.Individual.Individual" title="mimic.core.Individual.Individual"><em>core.Individual.Individual</em></a>) – Individual</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>penalty value</p>
@@ -170,18 +171,21 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="mimic.core.Environment.environment.get_score">
-<span class="sig-name descname"><span class="pre">get_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#mimic.core.Environment.environment.get_score" title="Link to this definition"></a></dt>
-<dd><p>Return score of individual</p>
+<dt class="sig sig-object py" id="mimic.core.Environment.Environment.get_score">
+<span class="sig-name descname"><span class="pre">get_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span></span></span><a class="headerlink" href="#mimic.core.Environment.Environment.get_score" title="Link to this definition"></a></dt>
+<dd><p>Return score</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>individual</strong> (<a class="reference internal" href="Individual.html#mimic.core.Individual.individual" title="mimic.core.Individual.individual"><em>core.Individual.individual</em></a>) – Individual</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>individual</strong> (<a class="reference internal" href="Individual.html#mimic.core.Individual.Individual" title="mimic.core.Individual.Individual"><em>core.Individual.Individual</em></a>) – Individual</p></li>
+<li><p><strong>sum</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, return the sum of fitness, penalty, and att functions.If False, return each values. Defaults to True.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>score</p>
+<dd class="field-even"><p>score values</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-odd"><p>Union[float, tuple]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -195,7 +199,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="Population.html" class="btn btn-neutral float-left" title="Population" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="../benchmark/tree.html" class="btn btn-neutral float-right" title="benchmark" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Optimizer.html" class="btn btn-neutral float-right" title="Optimizer" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

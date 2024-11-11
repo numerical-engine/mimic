@@ -1,26 +1,26 @@
-class optimizer_meta:
+class Optimizer_meta:
     """The class for optimization and population update
 
     Note:
         This class should be inherited, because method **run** hasn't been defined. Codes in `mimic/method/` will help you.
     """
-    def __call__(self, pop, env):
-        pop_new = pop.copy()
+    def __call__(self, population, environment):
+        population_new = population.copy()
         #####update generation and age
-        pop_new.generation += 1
-        for i in range(len(pop_new)):
-            pop_new.individuals[i].age += 1
+        population_new.generation += 1
+        for i in range(len(population_new)):
+            population_new.individuals[i].age += 1
         
-        return self.run(pop_new, env)
+        return self.run(population_new, environment)
     
-    def run(self, pop, env):
+    def run(self, population, environment):
         """Update population
 
         Args:
-            pop (core.Population.population): Current population.
-            env (core.Environment.environment): Environment we concern.
+            population core.Population.Population: Current population.
+            environment core.Environment.Environment: Environment we concern.
         Returns:
-            (core.Population.population): New population.
+            core.Population.Population: New population.
         Raises:
             NotImplementedError: This class should be inherited.
         """

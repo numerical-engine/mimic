@@ -2,7 +2,7 @@ import numpy as np
 from copy import deepcopy
 import sys
 
-class individual:
+class Individual:
     """Class for a individual.
 
     Args:
@@ -22,7 +22,7 @@ class individual:
         key (np.ndarray): Suplemental variables given from att. The name "key" is same with att_keys[i].
     """
     def __init__(self, x:np.ndarray, fitness:float = None, score:float = None, feasible:bool = None, age:int = 0, *, att:dict = {}):
-        assert len(x.shape) == 1, f"individual doesn't support batch soluion. len(x.shape) should be (dim, ), but got {x.shape}"
+        assert len(x.shape) == 1, f"Individual doesn't support batch soluion. len(x.shape) should be (dim, ), but got {x.shape}"
         self.x = x
         self.age = age
         self.fitness = fitness
@@ -65,7 +65,7 @@ class individual:
         """Return deep copy
 
         Returns:
-            (individual): Deep copy
+            core.Individual.Individual: Deep copy
         """
         x = deepcopy(self.x); att = deepcopy(self.att_dict())
         return type(self)(x, self.fitness, self.score, self.feasible, self.age, att = att)
