@@ -12,4 +12,4 @@ class sphere(Function_meta):
         Returns:
             float: Objective function value.
         """
-        return np.sum(individual.x**2, axis = 1)
+        return np.sum(individual.x**2)

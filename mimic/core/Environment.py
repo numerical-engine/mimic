@@ -53,11 +53,11 @@ class Environment:
         """
         f = self.get_fitness(individual)
         p = self.get_penalty(individual)
-        s = 0.
+        a = 0.
         for att_func in self.att_functions:
-            s += att_func(individual)
+            a += att_func(individual)
         
         if sum:
-            return float(s + p + f)
+            return float(a + p + f)
         else:
-            return float(f), float(p), float(s)
+            return float(f), float(p), float(a + p + f)

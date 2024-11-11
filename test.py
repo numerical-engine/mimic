@@ -1,8 +1,12 @@
 import mimic
 import numpy as np
 
-x = np.array([1.,2.,3.])
-att = {"sigma":np.ones(1)}
-ind = mimic.core.Individual(x, att = att)
-ind2 = ind.copy()
-print(ind2.sigma)
+dim = 2
+individuals = [mimic.Individual(np.random.rand(dim)) for _ in range(100)]
+environment = mimic.Environment(mimic.benchmark.sphere())
+population = mimic.Population(individuals, environment = environment)
+elite = mimic.utils.population.get_elite(population)
+# s_poop = mimic.utils.population.squeeze(population, (0, 3, 10))
+# print(len(s_poop))
+
+print(elite)
