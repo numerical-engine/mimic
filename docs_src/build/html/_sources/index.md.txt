@@ -6,4 +6,5 @@
 :caption: Contents
 resource/introduction
 resource/modules
+resource/development
 ```
