@@ -3,33 +3,36 @@ from copy import deepcopy
 import sys
 
 class Individual:
-    """Class for a individual.
+    """Class for individual
 
     Args:
-        x (np.ndarray): Solution. Shape should be (dim, ).
-        fitness (float): Objective function value. If None, this solution hasn't been evaluated.
-        score (float): Socre. If None, this solution hasn't been evaluated.
-        feasible (bool): Feasibility of this solution. If None, this solution hasn't been evaluated.
+        x (np.ndarray): Solution of individual
+        fitness (float): Fitness value
+        score (float): Score value
+        penalty (float): Value of penalty violation (If penalty > 0, this solution is infeasible)
         age (int): Age
+        att (dict): Suplemental variables
+        
     Attributes:
-        x (np.ndarray): Solution. Shape should be (dim, ).
-        fitness (float): Objective function value. If None, this solution hasn't been evaluated.
-        score (float): Socre. If None, this solution hasn't been evaluated.
-        feasible (bool): Feasibility of this solution. If None, this solution hasn't been evaluated.
+        x (np.ndarray): Solution of individual
+        fitness (float): Fitness value
+        score (float): Score value
+        penalty (float): Value of penalty violation (If penalty > 0, this solution is infeasible)
         age (int): Age
-        att_keys (list[str]): List of names given from att.
-        att_dims (list[int]): List of dimension given from att.
-        key (np.ndarray): Suplemental variables given from att. The name "key" is same with att_keys[i].
+        att_keys (list[str]): Names of suplemental variables
+        att_dims (list[int]): Dimension of suplemental variables
+    Note:
+        Individual also has attribute which name is att_key in att_keys
     """
-    def __init__(self, x:np.ndarray, fitness:float = None, score:float = None, feasible:bool = None, age:int = 0, *, att:dict = {}):
+    def __init__(self, x:np.ndarray, fitness:float = None, score:float = None, penalty:float = None, age:int = 0, *, att:dict = {}):
         assert len(x.shape) == 1, f"Individual doesn't support batch soluion. len(x.shape) should be (dim, ), but got {x.shape}"
         self.x = x
         self.age = age
         self.fitness = fitness
         self.score = score
-        self.feasible = feasible
-
-        ##### load **att as a Attributes
+        self.penalty = penalty
+    
+    ##### load att as a Attributes
         self.att_keys = []
         self.att_dims = []
         for key in att.keys():
@@ -39,7 +42,8 @@ class Individual:
             self.__dict__[key] = att[key]
     
     def __call__(self)->tuple:
-        return self.age, self.x, self.fitness
+        return self.age, self.x, self.fitness, self.penalty, self.score
+    
     def __str__(self)->str:
         return str(self())
     def __repr__(self)->str:
@@ -59,8 +63,19 @@ class Individual:
         Returns:
             int: Dimension
         """
-        return len(self.X) + np.sum(self.att_dims) if include_att else len(self.X)
+        return len(self.x) + np.sum(self.att_dims) if include_att else len(self.x)
     
+    @property
+    def feasible(self):
+        return (self.penalty == 0.)
+    
+    @property
+    def already_eval(self):
+        if (self.fitness is None) or (self.penalty is None) or (self.score is None):
+            return False
+        else:
+            return True
+
     def copy(self):
         """Return deep copy
 
@@ -68,17 +83,17 @@ class Individual:
             core.Individual.Individual: Deep copy
         """
         x = deepcopy(self.x); att = deepcopy(self.att_dict())
-        return type(self)(x, self.fitness, self.score, self.feasible, self.age, att = att)
+        return type(self)(x, self.fitness, self.score, self.penalty, self.age, att = att)
     
     def __add__(self, another):
-        X = self.x + another.x
+        x = self.x + another.x
         att = {key : self.__dict__[key] + another.__dict__[key] for key in self.att_keys}
-        return type(self)(X, age = 0, att = att)
+        return type(self)(x, age = 0, att = att)
     
     def __mul__(self, another):
-        X = another*self.x
+        x = another*self.x
         att = {key : another*self.__dict__[key] for key in self.att_keys}
-        return type(self)(X, age = 0, att = att)
+        return type(self)(x, age = 0, att = att)
     
     def __rmul__(self, another):
         return self.__mul__(another)

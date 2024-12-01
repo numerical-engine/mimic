@@ -14,7 +14,7 @@ def squeeze(population, indice:tuple):
     return type(population)(individuals, population.generation)
 
 
-def get_elite(population, eval_fitness:bool = True, only_feasible:bool = True):
+def get_elite(population, eval_fitness:bool = False, only_feasible:bool = True):
     """Return a elite individual (=the best fitness individual)
 
     Args:
@@ -26,6 +26,8 @@ def get_elite(population, eval_fitness:bool = True, only_feasible:bool = True):
     Note:
         Return only one of individuals which fitness(or score) is the lowest of all.
     """
+    assert population.already_eval
+
     if eval_fitness:
         values = np.array([individual.fitness for individual in population])
     else:
@@ -52,7 +54,7 @@ def concatenate(population1, population2):
     individuals = deepcopy(population1.individuals) + deepcopy(population2.individuals)
     generation = max(population1.generation, population2.generation)
 
-    return type(population1)(individuals, generation = generation)
+    return type(population1)(individuals, generation)
 
 def age_sort(population):
     """Sort individuals in population with respect to age
@@ -68,7 +70,7 @@ def age_sort(population):
 
     return squeeze(population, indice)
 
-def sort(population, eval_fitness:bool = True):
+def sort(population, eval_fitness:bool = False):
     """Sort individuals in population.
 
     Args:
@@ -77,6 +79,9 @@ def sort(population, eval_fitness:bool = True):
     Returns:
         core.Population.Population: Sorted population
     """
-    score = np.array([individual.score for individual in population])
-    indice = np.argsort(score)
+    if eval_fitness:
+        values = np.array([individual.fitness for individual in population])
+    else:
+        values = np.array([individual.score for individual in population])
+    indice = np.argsort(values)
     return squeeze(population, indice)

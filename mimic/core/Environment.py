@@ -1,4 +1,5 @@
 from typing import Union
+import numpy as np
 
 class Environment:
     """Abstruct class for environment
@@ -6,16 +7,13 @@ class Environment:
     Args:
         objective_function (Function.Function_meta): Objective function class.
         penalty_functions (list[Function.Penalty_function]): list of penalty function class.
-        att_functions (list[Function.Function_meta]) Other functions for score.
     Attributes:
         objective_function (Function.Function_meta): Objective function class.
         penalty_functions (list[Function.Penalty_function]): list of penalty function class.
-        att_functions (list[Function.Function_meta]) Other functions for score.
     """
-    def __init__(self, objective_function, penalty_functions:list = [], att_functions:list = []):
+    def __init__(self, objective_function, penalty_functions:list = []):
         self.objective_function = objective_function
         self.penalty_functions = penalty_functions
-        self.att_functions = att_functions
     
     def get_fitness(self, individual)->float:
         """Return fitness value of individual
@@ -41,23 +39,14 @@ class Environment:
             p += p_func(individual)
         return float(p)
     
-    def get_score(self, individual, sum:bool = True)->Union[float, tuple]:
+    def set_score(self, population):
         """Return score
 
         Args:
-            individual (core.Individual.Individual): Individual
-            sum (bool, optional): If true, return the sum of fitness, penalty, and att functions.If False, return each values. Defaults to True.
-
-        Returns:
-            Union[float, tuple]: score values
+            population (core.Population.Population): Population
         """
-        f = self.get_fitness(individual)
-        p = self.get_penalty(individual)
-        a = 0.
-        for att_func in self.att_functions:
-            a += att_func(individual)
-        
-        if sum:
-            return float(a + p + f)
-        else:
-            return float(f), float(p), float(a + p + f)
+        for individual in population:
+            if not individual.already_eval:
+                individual.fitness = self.get_fitness(individual)
+                individual.penalty = self.get_penalty(individual)
+                individual.score = individual.fitness + individual.penalty

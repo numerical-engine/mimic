@@ -55,8 +55,15 @@
 <li class="toctree-l3"><a class="reference internal" href="Population.html">Population</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Environment.html">Environment</a></li>
 <li class="toctree-l3"><a class="reference internal" href="Optimizer.html">Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Selection.html">Selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Crossover.html">Crossover</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Mutation.html">Mutation</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../selection/tree.html">selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../crossover/tree.html">crossover</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../mutation/tree.html">mutation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils/tree.html">utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../benchmark/tree.html">benchmark</a></li>
 </ul>
 </li>
@@ -92,24 +99,25 @@
 <span id="individual"></span><h1>Individual<a class="headerlink" href="#module-mimic.core.Individual" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mimic.core.Individual.Individual">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mimic.core.Individual.</span></span><span class="sig-name descname"><span class="pre">Individual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fitness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feasible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimic.core.Individual.Individual" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mimic.core.Individual.</span></span><span class="sig-name descname"><span class="pre">Individual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fitness</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">score</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">age</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">att</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mimic.core.Individual.Individual" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Class for a individual.</p>
+<p>Class for individual</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>np.ndarray</em>) – Solution. Shape should be (dim, ).</p></li>
-<li><p><strong>fitness</strong> (<em>float</em>) – Objective function value. If None, this solution hasn’t been evaluated.</p></li>
-<li><p><strong>score</strong> (<em>float</em>) – Socre. If None, this solution hasn’t been evaluated.</p></li>
-<li><p><strong>feasible</strong> (<em>bool</em>) – Feasibility of this solution. If None, this solution hasn’t been evaluated.</p></li>
+<li><p><strong>x</strong> (<em>np.ndarray</em>) – Solution of individual</p></li>
+<li><p><strong>fitness</strong> (<em>float</em>) – Fitness value</p></li>
+<li><p><strong>score</strong> (<em>float</em>) – Score value</p></li>
+<li><p><strong>penalty</strong> (<em>float</em>) – Value of penalty violation (If penalty &gt; 0, this solution is infeasible)</p></li>
 <li><p><strong>age</strong> (<em>int</em>) – Age</p></li>
+<li><p><strong>att</strong> (<em>dict</em>) – Suplemental variables</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mimic.core.Individual.Individual.x">
 <span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#mimic.core.Individual.Individual.x" title="Link to this definition"></a></dt>
-<dd><p>Solution. Shape should be (dim, ).</p>
+<dd><p>Solution of individual</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>np.ndarray</p>
@@ -120,7 +128,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mimic.core.Individual.Individual.fitness">
 <span class="sig-name descname"><span class="pre">fitness</span></span><a class="headerlink" href="#mimic.core.Individual.Individual.fitness" title="Link to this definition"></a></dt>
-<dd><p>Objective function value. If None, this solution hasn’t been evaluated.</p>
+<dd><p>Fitness value</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -131,7 +139,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mimic.core.Individual.Individual.score">
 <span class="sig-name descname"><span class="pre">score</span></span><a class="headerlink" href="#mimic.core.Individual.Individual.score" title="Link to this definition"></a></dt>
-<dd><p>Socre. If None, this solution hasn’t been evaluated.</p>
+<dd><p>Score value</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -140,12 +148,12 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="mimic.core.Individual.Individual.feasible">
-<span class="sig-name descname"><span class="pre">feasible</span></span><a class="headerlink" href="#mimic.core.Individual.Individual.feasible" title="Link to this definition"></a></dt>
-<dd><p>Feasibility of this solution. If None, this solution hasn’t been evaluated.</p>
+<dt class="sig sig-object py" id="mimic.core.Individual.Individual.penalty">
+<span class="sig-name descname"><span class="pre">penalty</span></span><a class="headerlink" href="#mimic.core.Individual.Individual.penalty" title="Link to this definition"></a></dt>
+<dd><p>Value of penalty violation (If penalty &gt; 0, this solution is infeasible)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>bool</p>
+<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -164,7 +172,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mimic.core.Individual.Individual.att_keys">
 <span class="sig-name descname"><span class="pre">att_keys</span></span><a class="headerlink" href="#mimic.core.Individual.Individual.att_keys" title="Link to this definition"></a></dt>
-<dd><p>List of names given from att.</p>
+<dd><p>Names of suplemental variables</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[str]</p>
@@ -175,7 +183,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mimic.core.Individual.Individual.att_dims">
 <span class="sig-name descname"><span class="pre">att_dims</span></span><a class="headerlink" href="#mimic.core.Individual.Individual.att_dims" title="Link to this definition"></a></dt>
-<dd><p>List of dimension given from att.</p>
+<dd><p>Dimension of suplemental variables</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[int]</p>
@@ -183,16 +191,14 @@
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="mimic.core.Individual.Individual.key">
-<span class="sig-name descname"><span class="pre">key</span></span><a class="headerlink" href="#mimic.core.Individual.Individual.key" title="Link to this definition"></a></dt>
-<dd><p>Suplemental variables given from att. The name “key” is same with att_keys[i].</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>np.ndarray</p>
-</dd>
-</dl>
-</dd></dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Individual also has attribute which name is att_key in att_keys</p>
+</div>
+<dl class="py property">
+<dt class="sig sig-object py" id="mimic.core.Individual.Individual.already_eval">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">already_eval</span></span><a class="headerlink" href="#mimic.core.Individual.Individual.already_eval" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mimic.core.Individual.Individual.att_dict">
@@ -238,6 +244,11 @@
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mimic.core.Individual.Individual.feasible">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">feasible</span></span><a class="headerlink" href="#mimic.core.Individual.Individual.feasible" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

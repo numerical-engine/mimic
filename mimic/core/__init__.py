@@ -1,5 +1,4 @@
 from mimic.core.Function import Function_meta, Penalty_function_meta
-from mimic.core.Environment import Environment
-from mimic.core.Individual import Individual
-from mimic.core.Population import Population
 from mimic.core.Optimizer import Optimizer_meta
+from mimic.core.Selection import Selection_meta
+from mimic.core.Survival import Survival_meta

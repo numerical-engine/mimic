@@ -4,4 +4,6 @@
 :caption: Contents
 Sphere
 RosenBrock
+Beale
+Rastrigin
 ```

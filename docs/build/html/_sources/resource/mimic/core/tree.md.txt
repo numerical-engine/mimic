@@ -7,4 +7,7 @@ Individual
 Population
 Environment
 Optimizer
+Selection
+Crossover
+Mutation
 ```
