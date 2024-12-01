@@ -5,6 +5,7 @@
 :maxdepth: 2
 :caption: Contents
 resource/introduction
+resource/tutorials
 resource/modules
 resource/development
 ```
