@@ -1,32 +1,13 @@
-from mimic.core.Selection import Selection_meta
-from mimic import utils
+from mimic.core.Selection_core import Selection
 import numpy as np
 
 
-class tournament(Selection_meta):
-    """Tournament selection
-
-    Args:
-        k (int): Number of individuals in one play.
-        replace (bool): If True, individuals which have played can play again.
-    Attributes:
-        k (int): Number of individuals in one play.
-        replace (bool): If True, individuals which have played can play again.
-    """
+class tournament(Selection):
     def __init__(self, k:int = 2, replace:bool = True):
         self.k = k
         self.replace = replace
     
     def run(self, score:np.ndarray, selection_num:int)->tuple:
-        """Select individuals for parents
-
-        Args:
-            score (np.ndarray): Score of all individuals
-            selection_num (int): Number of selection (i.e., mu)
-
-        Returns:
-            tuple[int]: Indice of selected individuals
-        """
         if not self.replace:
             assert len(score) >= (self.k*selection_num)
         players = np.arange(len(score))

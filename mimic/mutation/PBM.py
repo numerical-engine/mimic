@@ -1,20 +1,7 @@
 import numpy as np
-from mimic.core.Mutation import Mutation_meta
+from mimic.core.Mutation_core import Mutation
 
-class pbm(Mutation_meta):
-    """Mutation by PBM
-
-    Args:
-        xl (np.ndarray): Lower limit of solution
-        xu (np.ndarray): Upper limit of solution
-        prob (float): Probability
-        eta (float): Hyper parameter
-    Attributes:
-        xl (np.ndarray): Lower limit of solution
-        xu (np.ndarray): Upper limit of solution
-        prob (float): Probability
-        eta (float): Hyper parameter
-    """
+class pbm(Mutation):
     def __init__(self, xl:np.ndarray, xu:np.ndarray, prob:float = 0.1, eta:float = 20.):
         super().__init__()
         self.prob = prob
@@ -23,13 +10,6 @@ class pbm(Mutation_meta):
         self.xu = xu
     
     def run(self, individual):
-        """Return a mutated individual
-
-        Args:
-            individual (core.Individual.Individual): Individual
-        Returns:
-            core.Individual.Individual: Mutated individual
-        """
         delta_l = (individual.x - self.xl)/(self.xu - self.xl)
         delta_u = (self.xu - individual.x)/(self.xu - self.xl)
 

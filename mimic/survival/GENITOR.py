@@ -1,7 +1,7 @@
-from mimic.core.Survival import Survival_meta
+from mimic.core.Survival_core import Survival
 from mimic import utils
 
-class genitor(Survival_meta):
+class genitor(Survival):
     def run(self, population, mu:int, lam:int):
         assert mu > lam
 

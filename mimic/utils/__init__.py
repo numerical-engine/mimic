@@ -1,2 +1,1 @@
-from mimic.utils import population
-from mimic.utils import selection
+from mimic.utils import Population, Selection
