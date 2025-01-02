@@ -4,3 +4,4 @@ from mimic.core.Optimizer_core import Optimizer
 from mimic import SOEA
 from mimic import benchmark
 from mimic import selection, crossover, mutation, survival
+from mimic import CMAES

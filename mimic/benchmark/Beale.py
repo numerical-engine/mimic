@@ -2,8 +2,5 @@ import numpy as np
 from mimic.core.Function_core import Function
 
 class Beale(Function):
-    def forward(self, individual)->float:
-        assert individual.dim() == 2, f"dim equals to {individual.dim()}"
-        x, y = individual.x
-
-        return (1.5 - x + x*y)**2 + (2.25 - x + x*y**2)**2 + (2.625 - x + x*y**3)**2
+    def forward(self, x:np.ndarray)->float:
+        return (1.5 - x[0] + x[0]*x[1])**2 + (2.25 - x[0] + x[0]*x[1]**2)**2 + (2.625 - x[0] + x[0]*x[1]**3)**2
