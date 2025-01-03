@@ -1,6 +1,7 @@
 import numpy as np
 from copy import deepcopy
 import networkx as nx
+import sys
 
 def squeeze(population, indice:tuple):
     individuals = [population.individuals[idx].copy() for idx in indice]
@@ -19,6 +20,11 @@ def get_elite(population, only_feasible:bool = True):
     else:
         idx = np.argmin(values)
         return population[idx]
+
+def elite_set(population, num:int):
+    pop_sort = sort(population)
+    elite = squeeze(pop_sort, np.arange(num))
+    return elite
 
 def concatenate(population1, population2):
     individuals = deepcopy(population1.individuals) + deepcopy(population2.individuals)
@@ -48,12 +54,11 @@ def NBC1(population, phi:float = 2.)->list[tuple[int]]:
         
         better_idx = np.where(f < fitness)[0]
         if len(better_idx) == 0: continue
-
-        better_pops = population[better_idx]
+        better_pops = np.stack([population[idx].x for idx in better_idx], axis = 0)
         nearest_idx = better_idx[np.argmin(np.linalg.norm(better_pops - x, axis = 1))]
 
-        Adj_matrix[curr_idx, nearest_idx] = np.linalg.norm(population[nearest_idx] - x)
-        Adj_matrix[nearest_idx, curr_idx] = np.linalg.norm(population[nearest_idx] - x)
+        Adj_matrix[curr_idx, nearest_idx] = np.linalg.norm(population[nearest_idx].x - x)
+        Adj_matrix[nearest_idx, curr_idx] = np.linalg.norm(population[nearest_idx].x - x)
     
     mean_edge_length = np.mean(Adj_matrix[Adj_matrix > 0.])
     Adj_matrix[Adj_matrix > (phi*mean_edge_length)] = 0.
@@ -66,7 +71,8 @@ def NBC1(population, phi:float = 2.)->list[tuple[int]]:
 
 
 def NBC2(population, phi:float = 2., b:float = None)->list[tuple[int]]:
-    num_node, dim = population.shape
+    num_node = len(population)
+    dim = len(population[0].x)
     fitness = np.array([individual.fitness for individual in population])
     if b is None:
         b = (-4.69e-4*dim**2 + 0.0263*dim + 3.66/dim - 0.457)*np.log10(num_node) + 7.51e-4*dim**2 - 0.0421*dim - 2.26/dim + 1.83
@@ -75,14 +81,14 @@ def NBC2(population, phi:float = 2., b:float = None)->list[tuple[int]]:
     for curr_idx, individual in zip(np.arange(num_node, dtype=int), population):
         x = individual.x
         f = individual.fitness
-        
+
         better_idx = np.where(f < fitness)[0]
         if len(better_idx) == 0: continue
+        better_pops = np.stack([population[idx].x for idx in better_idx], axis = 0)
 
-        better_pops = population[better_idx]
         nearest_idx = better_idx[np.argmin(np.linalg.norm(better_pops - x, axis = 1))]
 
-        Adj_matrix[curr_idx, nearest_idx] = np.linalg.norm(population[nearest_idx] - x)
+        Adj_matrix[curr_idx, nearest_idx] = np.linalg.norm(population[nearest_idx].x - x)
     
     mean_edge_length = np.mean(Adj_matrix[Adj_matrix > 0.])
     Adj_matrix[Adj_matrix > (phi*mean_edge_length)] = 0.

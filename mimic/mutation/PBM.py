@@ -1,5 +1,6 @@
 import numpy as np
 from mimic.core.Mutation_core import Mutation
+import sys
 
 class pbm(Mutation):
     def __init__(self, xl:np.ndarray, xu:np.ndarray, prob:float = 0.1, eta:float = 20.):
@@ -14,9 +15,11 @@ class pbm(Mutation):
         delta_u = (self.xu - individual.x)/(self.xu - self.xl)
 
         u = np.random.rand(len(delta_l))
-        delta = np.where(u <= 0.5,
-                         (2.*u + (1.-2.*u)*(1. - delta_l)**(1./(self.eta + 1.))) - 1.,
-                         1. - (2.*(1. - u) + (2.*u - 1.)*(1. - delta_u)**(self.eta + 1.))**(1./(self.eta + 1.)))
+        delta = np.where(u < 0.5,
+                        np.power(2*u + (1. - 2.*u)*np.power(1-delta_l, self.eta+1), 1./(self.eta+1))-1.,
+                        1. - np.power(2.*(1-u)+(2.*u-1)*np.power(1.-delta_u, self.eta+1.), 1./(self.eta+1))
+                        )
+
 
         mask = (np.random.rand(len(delta_l)) < self.prob).astype(float)
         delta *= mask*(self.xu - self.xl)
