@@ -3,7 +3,7 @@ from mimic import utils
 import numpy as np
 
 class fps(Selection):
-    def __init__(self, selection_way = utils.Selection.SUS, window:float = 0.):
+    def __init__(self, selection_way = utils.Selection.roulette_wheel, window:float = 0.):
         self.selection_way = selection_way
         self.window = window
     def run(self, score:np.ndarray, selection_num:int)->tuple[int]:

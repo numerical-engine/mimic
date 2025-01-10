@@ -11,19 +11,17 @@ class pbm(Mutation):
         self.xu = xu
     
     def run(self, individual):
-        delta_l = (individual.x - self.xl)/(self.xu - self.xl)
-        delta_u = (self.xu - individual.x)/(self.xu - self.xl)
-
-        u = np.random.rand(len(delta_l))
-        delta = np.where(u < 0.5,
-                        np.power(2*u + (1. - 2.*u)*np.power(1-delta_l, self.eta+1), 1./(self.eta+1))-1.,
-                        1. - np.power(2.*(1-u)+(2.*u-1)*np.power(1.-delta_u, self.eta+1.), 1./(self.eta+1))
-                        )
-
-
-        mask = (np.random.rand(len(delta_l)) < self.prob).astype(float)
+        x = individual.x
+        U = np.random.rand(len(x))
+        delta = []
+        for u in U:
+            if u <= 0.5:
+                delta.append((2*u)**(1./(self.eta+1)) - 1.)
+            else:
+                delta.append(1. - (2*(1-u))**(1./(self.eta+1)))
+        delta = np.array(delta)
+        mask = (np.random.rand(len(x)) < self.prob).astype(float)
         delta *= mask*(self.xu - self.xl)
 
         individual.x += delta
-
         return individual

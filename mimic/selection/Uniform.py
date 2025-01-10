@@ -3,7 +3,7 @@ from mimic import utils
 import numpy as np
 
 class uniform(Selection):
-    def __init__(self, selection_way = utils.Selection.SUS):
+    def __init__(self, selection_way = utils.Selection.roulette_wheel):
         self.selection_way = selection_way
     
     def run(self, score:np.ndarray, selection_num:int)->tuple[int]:

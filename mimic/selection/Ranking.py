@@ -3,7 +3,7 @@ from mimic import utils
 import numpy as np
 
 class ranking(Selection):
-    def __init__(self, selection_way = utils.Selection.SUS, s:float = 1.5):
+    def __init__(self, selection_way = utils.Selection.roulette_wheel, s:float = 1.5):
         assert (s > 1.) and (s <= 2.)
         self.selection_way = selection_way
         self.s = s

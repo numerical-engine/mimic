@@ -25,14 +25,6 @@ class Crossover:
         return offsprings
     
     def _run(self, pair:list)->list:
-        """Returns offsprings given from pair.
-
-        Args:
-            pair (list[core.Individual.Individual]): pair of individual
-            environment (core.Environment.Environment): Environment
-        Returns:
-            list[core.Individual.Individual]: list of individual about offspring
-        """
         x_pair = tuple(individual.x for individual in pair)
         x_offs = self.run(x_pair)
         assert len(x_offs) == self.offspring_num

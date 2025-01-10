@@ -16,9 +16,24 @@ class Population:
     def copy(self):
         return type(self)(deepcopy(self.individuals), self.generation)
     
+    def reset_score(self):
+        for i in range(len(self)):
+            self.individuals[i].score = None
+
+    def shuffle(self):
+        indice = np.arange(len(self))
+        np.random.shuffle(indice)
+        self.individuals = [self.individuals[i] for i in indice]
+
     @property
     def already_eval(self):
         for individual in self:
             if  individual.already_eval == False:
+                return False
+        return True
+    @property
+    def already_fit(self):
+        for individual in self:
+            if  individual.already_fit == False:
                 return False
         return True

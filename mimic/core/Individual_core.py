@@ -2,7 +2,7 @@ import numpy as np
 from copy import deepcopy
 
 class Individual_core:
-    def __init__(self, x:np.ndarray, fitness = None, score:float = None, penalty = None, age:int = 0):
+    def __init__(self, x:np.ndarray, fitness = None, score:float = None, penalty = None, age:int = 0)->None:
         assert len(x.shape) == 1, f"Individual doesn't support batch soluion. len(x.shape) should be (dim, ), but got {x.shape}"
         self.x = x
         self.age = age
@@ -21,15 +21,20 @@ class Individual_core:
         return len(self.x)
     @property
     def feasible(self)->bool:
-        raise NotImplementedError
-    
+        return (self.penalty == 0.)
     @property
     def already_eval(self):
         if (self.fitness is None) or (self.penalty is None) or (self.score is None):
             return False
         else:
             return True
-
+    @property
+    def already_fit(self):
+        if (self.fitness is None) or (self.penalty is None):
+            return False
+        else:
+            return True
+    
     def copy(self):
         x = deepcopy(self.x)
         fitness = deepcopy(self.fitness)

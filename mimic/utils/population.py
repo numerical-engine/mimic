@@ -7,6 +7,14 @@ def squeeze(population, indice:tuple):
     individuals = [population.individuals[idx].copy() for idx in indice]
     return type(population)(individuals, population.generation)
 
+def split(population, num:int, shuffle:bool = True):
+    assert (len(population)%num) == 0
+    if shuffle:
+        population.shuffle()
+    indice = np.arange(len(population)).reshape((num, -1))
+
+    populations = [squeeze(population, idx) for idx in indice]
+    return populations
 
 def get_elite(population, only_feasible:bool = True):
     assert population.already_eval
@@ -32,6 +40,15 @@ def concatenate(population1, population2):
 
     return type(population1)(individuals, generation)
 
+def bconcatenate(populations:list):
+    individuals = []
+    for population in populations:
+        individuals += deepcopy(population.individuals)
+    generation = max([population.generation for population in populations])
+
+    return type(populations[0])(individuals, generation)
+
+
 def age_sort(population):
     age = np.array([individual.age for individual in population])
     indice = np.argsort(age)
@@ -46,13 +63,13 @@ def sort(population):
 def NBC1(population, phi:float = 2.)->list[tuple[int]]:
     num_node = len(population)
     Adj_matrix = np.zeros((num_node, num_node))
-    fitness = np.array([individual.fitness for individual in population])
+    score = np.array([individual.score for individual in population])
 
     for curr_idx, individual in zip(np.arange(num_node, dtype=int), population):
         x = individual.x
-        f = individual.fitness
+        s = individual.score
         
-        better_idx = np.where(f < fitness)[0]
+        better_idx = np.where(s < score)[0]
         if len(better_idx) == 0: continue
         better_pops = np.stack([population[idx].x for idx in better_idx], axis = 0)
         nearest_idx = better_idx[np.argmin(np.linalg.norm(better_pops - x, axis = 1))]
@@ -73,16 +90,16 @@ def NBC1(population, phi:float = 2.)->list[tuple[int]]:
 def NBC2(population, phi:float = 2., b:float = None)->list[tuple[int]]:
     num_node = len(population)
     dim = len(population[0].x)
-    fitness = np.array([individual.fitness for individual in population])
+    score = np.array([individual.score for individual in population])
     if b is None:
         b = (-4.69e-4*dim**2 + 0.0263*dim + 3.66/dim - 0.457)*np.log10(num_node) + 7.51e-4*dim**2 - 0.0421*dim - 2.26/dim + 1.83
     Adj_matrix = np.zeros((num_node, num_node)) #Adjacency matrix whcih non-zero values mean distance between node
 
     for curr_idx, individual in zip(np.arange(num_node, dtype=int), population):
         x = individual.x
-        f = individual.fitness
+        s = individual.score
 
-        better_idx = np.where(f < fitness)[0]
+        better_idx = np.where(s < score)[0]
         if len(better_idx) == 0: continue
         better_pops = np.stack([population[idx].x for idx in better_idx], axis = 0)
 

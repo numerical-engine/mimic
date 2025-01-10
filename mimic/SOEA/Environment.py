@@ -3,25 +3,16 @@ import numpy as np
 
 class Environment(Environment_core):
     def __init__(self, objective_function, penalty_functions:list = []):
+        super().__init__(penalty_functions)
         self.objective_function = objective_function
-        self.penalty_functions = penalty_functions
     
     def get_fitness(self, individual)->float:
         f = self.objective_function(individual.x)
         return f
     
-    def get_penalty(self, individual)->float:
-        p = 0.
-        for p_func in self.penalty_functions:
-            p += p_func(individual.x)
-        return float(p)
-    
-    def set_score(self, population)->None:
+    def evaluate(self, population):
         for individual in population:
-            if not individual.already_eval:
-                individual.fitness = self.get_fitness(individual)
-                individual.penalty = self.get_penalty(individual)
-                individual.score = individual.fitness + individual.penalty
+            individual.score = individual.fitness + individual.penalty
 
 
 class FitnessShare(Environment):
@@ -30,7 +21,7 @@ class FitnessShare(Environment):
         self.alpha = alpha
         self.d_share = d_share
     
-    def set_score(self, population)->None:
+    def evaluate(self, population):
         shd_matrix = np.eye(len(population))
 
         for i in range(len(population)-1):
@@ -41,9 +32,6 @@ class FitnessShare(Environment):
                 shd = 1. - (d/self.d_share)**self.alpha if d <= self.d_share else 0.
                 shd_matrix[i,j] = shd
                 shd_matrix[j,i] = shd
-
-
+        
         for idx, individual in enumerate(population):
-            individual.fitness = self.get_fitness(individual)
-            individual.penalty = self.get_penalty(individual)
             individual.score = (individual.fitness + individual.penalty)/np.sum(shd_matrix[idx,:])

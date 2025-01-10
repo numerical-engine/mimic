@@ -1,0 +1,1 @@
+from mimic.MOEA.Model import VEGA

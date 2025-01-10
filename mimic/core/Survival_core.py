@@ -2,17 +2,17 @@ import numpy as np
 from mimic import utils
 
 class Survival:
-    def __call__(self, parents, offsprings, environment = None, fource:bool = False):
+    def __call__(self, parents, offsprings, environment = None, reset_score:bool = True):
         mu = len(parents)
         lam = len(offsprings)
 
         population = utils.Population.concatenate(parents, offsprings)
 
-        if fource:
+        if reset_score:
+            population.reset_score()
+        
+        if not population.already_eval:
             environment.set_score(population)
-        else:
-            if not population.already_eval:
-                environment.set_score(population)
         
         population_new = self.run(population, mu, lam)
         assert len(population_new) == mu

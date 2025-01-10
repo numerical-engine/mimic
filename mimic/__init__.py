@@ -1,4 +1,4 @@
-from mimic.core.Function_core import Function
+from mimic.core.Function_core import Function, PenaltyLower, PenaltyUpper
 from mimic.core.Population_core import Population
 from mimic.core.Optimizer_core import Optimizer
 from mimic import SOEA
