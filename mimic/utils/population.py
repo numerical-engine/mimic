@@ -127,3 +127,36 @@ def NBC2(population, phi:float = 2., b:float = None)->list[tuple[int]]:
     cluster = [tuple(g) for g in graphs]
     
     return cluster
+
+def is_nonDominated(population, i:int, comp:np.ndarray = None)->bool:
+    if comp is None: comp = np.arange(len(population))
+    if len(comp) == 0: return True
+    
+    target_fitness = population[i].fitness
+    fitness = np.stack([population[c].fitness for c in comp], axis = 0)
+    num, M = fitness.shape
+    mask = np.zeros(num, dtype=int)
+
+    for m in range(M):
+        mask += (target_fitness[m] <= fitness[:,m]).astype(int)
+    
+    if np.any(mask == 0):
+        return False
+    else:
+        return True
+
+def get_frontRank(population)->np.ndarray:
+    comp = np.arange(len(population))
+    frontRank = np.array([np.nan]*len(population))
+    current_rank = 0
+
+    while len(comp) > 0:
+        non_dominated = np.array([is_nonDominated(population, c, comp) for c in comp])
+
+        non_dominated_idx = np.array([c for c, nd in zip(comp, non_dominated) if nd])
+        frontRank[non_dominated_idx] = current_rank
+        current_rank += 1
+
+        comp = comp[non_dominated == False]
+    
+    return frontRank.astype(int)

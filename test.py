@@ -1,21 +1,24 @@
 import numpy as np
 import mimic
-from mimic.MOEA.Model import VEGA
+from mimic.MOEA.Model import MOGA
 from mimic import MOEA
 import sys
 import pandas as pd
+import grafi
+
+import mimic.utils
 
 
-class Optim(VEGA.Optimizer_VEGA):
-    def __init__(self, selection):
-        super().__init__(selection)
+class Optim(mimic.Optimizer):
+    def __init__(self):
+        self.selection = mimic.selection.fps()
         self.crossover = mimic.crossover.blx_alpha()
         # self.mutation = mimic.mutation.pbm(np.array([0.1, 0.]), np.array([1., 5.]), eta = 40.)
-        # self.mutation = mimic.mutation.normal(0.01)
-    def run(self, populations, parent_num):
-        parents = super().run(populations, parent_num)
+        self.mutation = mimic.mutation.normal(0.01)
+    def run(self, populations, environment):
+        parents = self.selection(population, 100)
         offspring = self.crossover(parents)
-        # offspring = self.mutation(offspring)
+        offspring = self.mutation(offspring)
 
         return offspring
 
@@ -32,7 +35,10 @@ class obj_func2(mimic.Function):
 
 obj_funcs = [obj_func1(), obj_func2()]
 
-environments = VEGA.get_environment_vega(obj_funcs, [x_lower, x_upper])
+d_share = 1.
+fl = np.array([0.1, 1.])
+fu = np.array([1., 10.])
+environment = MOGA.Environment_MOGA(obj_funcs, d_share, fl, fu, [x_lower, x_upper])
 x0 = np.random.uniform(0.1, 1., 100)
 x1 = np.random.uniform(0., 5., 100)
 X = np.stack((x0, x1), axis = 1)
@@ -40,23 +46,23 @@ X = np.stack((x0, x1), axis = 1)
 individuals = [MOEA.Individual(x) for x in X]
 population = mimic.Population(individuals)
 
-optim = Optim(mimic.selection.fps())
+optim = Optim()
 
 for _ in range(100):
-    population = optim(population, environments, 50)
+    population = optim(population, environment)
 
-individuals = population.individuals
-F = []
-X = []
-for individual in population.individuals:
-    f1 = obj_funcs[0](individual.x)
-    f2 = obj_funcs[1](individual.x)
-    X.append(individual.x)
-    F.append(np.array([f1, f2]))
+# individuals = population.individuals
+# F = []
+# X = []
+# for individual in population.individuals:
+#     f1 = obj_funcs[0](individual.x)
+#     f2 = obj_funcs[1](individual.x)
+#     X.append(individual.x)
+#     F.append(np.array([f1, f2]))
 
-X = np.stack(X, axis = 0)
-F = np.stack(F, axis = 0)
-F = pd.DataFrame(F)
-F.to_csv("F.csv")
-X = pd.DataFrame(X)
-X.to_csv("X.csv")
+# X = np.stack(X, axis = 0)
+# F = np.stack(F, axis = 0)
+# F = pd.DataFrame(F)
+# F.to_csv("F.csv")
+# X = pd.DataFrame(X)
+# X.to_csv("X.csv")

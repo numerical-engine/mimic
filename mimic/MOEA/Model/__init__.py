@@ -1,1 +1,1 @@
-from mimic.MOEA.Model import VEGA
+from mimic.MOEA.Model import VEGA, MOGA
